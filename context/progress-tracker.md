@@ -1,6 +1,6 @@
 # Progress Tracker
 
-Last updated: Feature Spec #1 draft.
+Last updated: Feature Spec #1 approved.
 
 ## Current Phase
 
@@ -8,7 +8,7 @@ Repository and context bootstrap complete; implementation has not started.
 
 ## Current Goal
 
-Review and approve the drafted Feature Spec #1 before building the extension.
+Hold the approved Feature Spec #1 ready for implementation; implementation is intentionally paused.
 
 ## Completed
 
@@ -27,13 +27,13 @@ Review and approve the drafted Feature Spec #1 before building the extension.
 
 ## In Progress
 
-- Feature Spec #1 — Extension Foundation & Compatibility is drafted and awaiting Sarah's approval.
-- No implementation is in progress; its future implementation branch/worktree is named in the draft but has not been created.
+- Feature Spec #1 — Extension Foundation & Compatibility is approved but not implemented.
+- No implementation is in progress; its future implementation branch/worktree is named in the spec but has not been created.
 
 ## Next Up
 
-1. Review and approve Feature Spec #1.
-2. Create the assigned implementation worktree only after approval.
+1. Wait for Sarah to start implementation.
+2. Create the assigned implementation worktree only when implementation begins.
 3. Implement and verify the foundation slice without adding later Note to Self behavior.
 4. Keep Feature Specs #15 and #16 deferred until the product and acceptance work supports release decisions.
 5. Replace the bootstrap native check with the extension's real type, lint, test, and build commands when Spec #1 is implemented.
@@ -42,7 +42,7 @@ Review and approve the drafted Feature Spec #1 before building the extension.
 
 - CI run: [review stack](https://github.com/madmoneymike5/pi-note-to-self/actions/runs/35007245540).
 - Security deep scan: [TruffleHog](https://github.com/madmoneymike5/pi-note-to-self/actions/runs/35007331494).
-- The repository has no package manifest or extension implementation yet by design; Spec #1 defines the first allowed implementation surface.
+- The repository has no package manifest or extension implementation yet by design; Spec #1 defines the first allowed implementation surface and is approved for later implementation.
 - The native check is a documentation/bootstrap check, not a substitute for future typechecking, linting, testing, or build gates.
 - Semantic checkpoint quality, native UI behavior, mouse behavior, storage failure handling, and real Pi model behavior have not been tested.
 - No package release or continuous delivery workflow exists.

@@ -61,7 +61,7 @@ An enabled blocker is always shown. When clear, its value is `Blocker: NONE`; it
 
 ## 8. Open decisions
 
-- Approval of the drafted Feature Spec #1 and its accepted verification evidence.
+- Any future changes to the approved Feature Spec #1 scope or its accepted verification evidence.
 - Stable storage path, schema, migrations, and concurrent-write behavior.
 - Exact deterministic trigger list and checkpoint cooldown/retry rules.
 - Whether the human note is sent to the active model by default.
@@ -71,7 +71,7 @@ An enabled blocker is always shown. When clear, its value is `Blocker: NONE`; it
 
 ## 9. Feature Spec #1 planning inputs
 
-Sarah selected these inputs for the draft; they authorize the draft's shape, not implementation:
+Sarah selected and approved these inputs for Feature Spec #1:
 
 - Target Pi compatibility: exact installed development and smoke-test target `@earendil-works/pi-coding-agent` `0.85.1`.
 - Node floor: `>=22.19.0`, inherited from Pi `0.85.1`'s engine requirement.
@@ -79,7 +79,7 @@ Sarah selected these inputs for the draft; they authorize the draft's shape, not
 - Tooling shape: strict TypeScript, Node's built-in test runner, ESLint with TypeScript support, and a truthful build/check path that typechecks and dry-runs package assembly without committing to an emitted `dist` artifact.
 - Development package remains private and is not a publication or CD decision.
 
-Feature Spec #1 is currently **Draft — awaiting Sarah's approval**. Until approval, no extension implementation is authorized.
+Feature Spec #1 is **Approved — implementation not started**. Sarah explicitly instructed that implementation must not begin yet.
 
 ## 10. Approved feature-spec sequencing for release
 

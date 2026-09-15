@@ -1,12 +1,12 @@
 # Feature Specification 01 — Extension Foundation & Compatibility
 
-**Status:** Draft — awaiting Sarah's approval
+**Status:** Approved — implementation not started
 **Product:** Note to Self
 **Proposed implementation branch:** `feature-01-extension-foundation`
 **Proposed implementation worktree:** `/home/sarah-taylor/Dev/worktrees/pi-note-to-self--f913adf4/feature-01-foundation`
-**Authoring worktree:** `spec-01-foundation` (documentation only)
+**Authoring worktree:** `spec-01-foundation` (removed after documentation merge)
 
-This document defines the first implementation slice. It is not approval to implement until Sarah explicitly approves this draft.
+This document defines the first implementation slice. Sarah approved this scope; implementation has not started by explicit instruction.
 
 ## 1. Purpose
 
@@ -26,7 +26,7 @@ Read and apply:
 - [Progress tracker](../progress-tracker.md)
 - [Planning ledger — Sections 2, 7, 8, 9, and 11](../planning-decision-ledger.md)
 
-This slice has no product-feature dependency. It is blocked by this specification's approval and by any consequential choice not settled below.
+This slice has no product-feature dependency. Its implementation is intentionally not started yet and remains bounded by the choices and exclusions below.
 
 ## 3. User/System Outcome
 
@@ -40,7 +40,7 @@ A clean checkout can be installed with npm and can prove all of the following wi
 
 ## 4. Settled Foundation Choices
 
-These choices were selected for this draft:
+These choices were approved for this slice:
 
 - **Pi target:** exact development and smoke-test target `@earendil-works/pi-coding-agent` version `0.85.1`.
 - **Node floor:** `>=22.19.0`, matching Pi `0.85.1`'s declared engine requirement.
@@ -179,7 +179,7 @@ Rejected checks:
 
 ## 9. Acceptance Criteria
 
-The draft is accepted for implementation only when Sarah approves it and the implementation can demonstrate:
+The approved slice is accepted as implemented only when the implementation can demonstrate:
 
 - [ ] The future implementation branch and worktree named at the top are used; this documentation worktree is not reused for code.
 - [ ] A clean `npm ci --ignore-scripts` succeeds without relying on global TypeScript or ESLint binaries.
@@ -193,7 +193,7 @@ The draft is accepted for implementation only when Sarah approves it and the imp
 
 ## 10. Handoff and Review
 
-Before implementation begins, Sarah must approve this draft. During implementation:
+Sarah has approved this specification. When implementation begins, the following rules apply:
 
 1. Work only in the assigned linked worktree and branch.
 2. Stop and report if the spec does not determine a consequential package, Pi API, security, or process-lifecycle choice.
@@ -203,9 +203,9 @@ Before implementation begins, Sarah must approve this draft. During implementati
 6. Do not open, merge, or close a pull request automatically.
 7. Do not integrate or delete the implementation worktree until Sarah authorizes the handoff.
 
-## 11. Remaining Questions for Approval
+## 11. Remaining Implementation Questions
 
-The following are deliberately not guessed in this draft:
+The following are deliberately left for the implementation handoff and later release planning:
 
 - The exact compatible release versions for TypeScript, ESLint, TypeScript ESLint, and Node types.
 - The exact RPC/startup readiness signal used by the smoke runner.

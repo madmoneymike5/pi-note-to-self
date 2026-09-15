@@ -1,12 +1,12 @@
 # Feature Specifications
 
-Feature Spec #1 is drafted and awaiting Sarah's approval; no implementation specification is approved or active yet.
+Feature Spec #1 is approved but implementation has not started; no implementation worktree exists yet.
 
 ## Proposed Feature-Spec Inventory
 
-These are planning entries, not written or approved implementation specifications:
+Entries without their own document are planning entries, not written specifications. Feature Spec #1 is approved but not implemented:
 
-1. [Extension Foundation & Compatibility](01-extension-foundation-and-compatibility.md) — **Draft, awaiting approval**
+1. [Extension Foundation & Compatibility](01-extension-foundation-and-compatibility.md) — **Approved, implementation not started**
 2. Project Identity & Local Storage
 3. Human Note Lifecycle
 4. Core Widget & Commands
