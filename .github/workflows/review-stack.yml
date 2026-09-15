@@ -1,0 +1,19 @@
+name: Review Stack
+# review-stack-control: runtime mirror rollout verification
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  review-stack:
+    uses: madmoneymike5/review-stack-control/.github/workflows/review-stack.yml@6f6b12a0330566bf8e8e41a4d361091e51372661
+    with:
+      native-command: >-
+        python3 scripts/check_repository.py
+      opengrep-excludes: ""
+      gitleaks-excludes: |-
