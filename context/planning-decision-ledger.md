@@ -57,6 +57,7 @@ An enabled blocker is always shown. When clear, its value is `Blocker: NONE`; it
 - TruffleHog is weekly/manual and separate from pull-request checks.
 - Continuous delivery is not configured because there is no approved release artifact.
 - Automatic pull-request creation, merging, and closing are not enabled.
+- CD is a separate product-delivery concern from the review stack and CI.
 
 ## 8. Open decisions
 
@@ -68,6 +69,17 @@ An enabled blocker is always shown. When clear, its value is `Blocker: NONE`; it
 - Package, license, release, registry, and future publication policy.
 - Whether a curated checkpoint may later be exported to Chronicle.
 
-## 9. Decision rule
+## 9. Approved feature-spec sequencing for release
+
+Sarah approved separating the release work into two later feature specifications:
+
+- **Feature Spec #13 — Installation, Upgrade & Local Distribution:** keep this focused on local installation and upgrade behavior.
+- **Feature Spec #14 — End-to-End Dogfood & Acceptance:** verify the product before release work.
+- **Feature Spec #15 — Release Readiness & Publication Contract:** decide the package format, license, versioning, registry, installation/upgrade contract, permissions, rollback, and release gates.
+- **Feature Spec #16 — Configure CD & Publish First Version:** implement the release workflow, build and verify the artifact, require explicit human approval, publish the first version, and verify installation from the published source.
+
+The initial CD design is Continuous Delivery with a manual publish gate. Automatic deployment on every merge is not approved. The actual package, registry, version, credentials, and publication details remain open until Feature Spec #15.
+
+## 10. Decision rule
 
 The latest explicit answer from Sarah wins. A working suggestion is not a settled decision. If an open choice is consequential, stop and ask before affected implementation.

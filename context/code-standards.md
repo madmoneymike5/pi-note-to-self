@@ -57,7 +57,8 @@
 - Do code-changing work in a linked worktree under `/home/sarah-taylor/Dev/worktrees/`.
 - Use the central review stack. GitHub Actions are CI; advisory bots do not replace local review.
 - Do not automatically open, merge, or close pull requests.
-- Do not configure continuous delivery until release and publication decisions are approved.
+- Do not configure continuous delivery before Feature Spec #15 approves the release-readiness/publication contract and Feature Spec #16 is approved for implementation.
+- Treat the first CD workflow as a manually approved delivery gate unless a later decision explicitly authorizes automatic deployment.
 
 ## Test Quality and Evidence
 

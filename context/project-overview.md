@@ -69,6 +69,13 @@ Sarah can enable or disable fields and arrange their order. At most four fields 
 - `/checkpoint` provides a manual update path.
 - The display shows whether the summary is fresh, pending, or stale.
 
+### Release and distribution
+
+- Local installation and upgrades are part of the product's later distribution work.
+- Release readiness and the publication contract are planned as Feature Spec #15.
+- Configuring Continuous Delivery and publishing the first version are planned as Feature Spec #16.
+- The first CD workflow is expected to use an explicit human approval gate; automatic deployment on every merge is not assumed.
+
 ## Scope
 
 ### In Scope
@@ -89,7 +96,7 @@ Sarah can enable or disable fields and arrange their order. At most four fields 
 - Storing raw conversations or tool logs as a second transcript database.
 - A background daemon that launches an independent agent continuously.
 - Automatically opening, merging, or closing pull requests.
-- Continuous delivery or package publication before a release artifact and publication contract exist.
+- Continuous delivery or package publication before the release-readiness and publication-contract work in Feature Spec #15.
 - Promising that an agent will always produce a correct semantic summary; the extension must expose stale or incomplete state.
 
 ## Success Criteria

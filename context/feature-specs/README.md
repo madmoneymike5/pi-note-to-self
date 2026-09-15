@@ -2,6 +2,29 @@
 
 No feature specification is active yet.
 
+## Proposed Feature-Spec Inventory
+
+These are planning entries, not written or approved implementation specifications:
+
+1. Extension Foundation & Compatibility
+2. Project Identity & Local Storage
+3. Human Note Lifecycle
+4. Core Widget & Commands
+5. Compact Fields & Display Preferences
+6. Workstream Identity & Restoration
+7. Deterministic Activity & Freshness
+8. Manual Semantic Checkpoints
+9. Automatic Semantic Checkpoints
+10. Project Shelf & Workstream Navigation
+11. Mouse & Advanced TUI Interaction
+12. Privacy, Reliability & Recovery Hardening
+13. Installation, Upgrade & Local Distribution
+14. End-to-End Dogfood & Acceptance
+15. Release Readiness & Publication Contract
+16. Configure CD & Publish First Version
+
+Feature Specs #15 and #16 are an approved planning split: #15 decides the release artifact and publication contract; #16 implements Continuous Delivery with an explicit human approval gate and verifies the first publication. Automatic deployment on every merge is not assumed.
+
 Each implementation unit must have a bounded specification before code changes begin. The specification should identify:
 
 - the exact behavior in scope;

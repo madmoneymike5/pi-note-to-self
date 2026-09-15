@@ -41,6 +41,6 @@ The current repository review stack is:
 4. Kodus and CodeRabbit advisory review.
 5. Greptile manual-only when requested.
 
-The stack is CI and review infrastructure, not a release pipeline. Continuous delivery remains unconfigured until an artifact and publication contract exist.
+The stack is CI and review infrastructure, not a release pipeline. Continuous Delivery is deferred to Feature Spec #16 until Feature Spec #15 settles the release artifact and publication contract. The initial CD design is a manually approved delivery gate, not automatic deployment on every merge.
 
 A handoff reports changed files, worktree and branch, commits, checks run, checks not run, limitations, and remaining decisions. Do not claim semantic summary quality from a mock or a single model response.

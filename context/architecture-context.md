@@ -24,7 +24,7 @@ No custom Pi client, hosted database, mandatory external service, or telemetry i
 - **Update engine:** Combines deterministic event facts with bounded semantic checkpoint requests. It does not invent completed work.
 - **Presentation:** Renders the compact and expanded widget in normal Pi layout. The expanded widget is not a permanent overlay.
 - **Persistence:** Writes only Note to Self data. It does not edit Pi credentials, identity instructions, context files, or arbitrary project files.
-- **Delivery stack:** GitHub Actions is CI. OpenGrep, Gitleaks, Trivy, and weekly TruffleHog are security gates; Kodus and CodeRabbit are advisory; Greptile is manual-only. Continuous delivery is not configured yet.
+- **Delivery stack:** GitHub Actions is CI. OpenGrep, Gitleaks, Trivy, and weekly TruffleHog are security gates; Kodus and CodeRabbit are advisory; Greptile is manual-only. Continuous Delivery is deferred to Feature Spec #16 and depends on the release-readiness/publication contract in Feature Spec #15.
 
 ## Storage Model
 
@@ -83,5 +83,5 @@ Before implementation, settle:
 - Whether the human note is model context by default or display-only by default.
 - Exact compact-field editor behavior and the maximum field length/truncation rules.
 - First feature slice and its accepted verification evidence.
-- Package name, license, release artifact, registry, and continuous-delivery policy.
+- Package name, license, release artifact, registry, and publication contract; Feature Spec #15 owns these decisions, while Feature Spec #16 owns the CD workflow and first publication.
 - Whether any curated checkpoint should be exported to Chronicle and under what approval boundary.

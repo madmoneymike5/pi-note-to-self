@@ -23,6 +23,7 @@ Write and review a bounded first implementation specification before building th
 - Pull-request review stack passed: native check, OpenGrep, Gitleaks, and Trivy.
 - Manual TruffleHog full-history scan passed.
 - Shared context documents and the feature-specification directory created.
+- Release work split into approved planning entries: #15 release readiness/publication contract, then #16 manually gated CD and first-version publication.
 
 ## In Progress
 
@@ -30,10 +31,11 @@ Write and review a bounded first implementation specification before building th
 
 ## Next Up
 
-1. Review the context bootstrap.
+1. Review the context bootstrap and proposed feature-spec inventory.
 2. Decide and write the first bounded feature specification.
 3. Create a dedicated feature worktree before implementation.
-4. Replace the bootstrap native check with the extension's real type, lint, test, and build commands when those exist.
+4. Keep Feature Specs #15 and #16 deferred until the product and acceptance work supports release decisions.
+5. Replace the bootstrap native check with the extension's real type, lint, test, and build commands when those exist.
 
 ## Evidence and Gaps
 
