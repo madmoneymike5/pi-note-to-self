@@ -1,6 +1,6 @@
 # Current Issues
 
-Last updated: initial repository bootstrap.
+Last updated: Feature Spec #1 draft.
 
 ## Open issues
 
@@ -10,10 +10,10 @@ None confirmed.
 
 These are not implementation defects, but they must be resolved before affected work:
 
-- The first implementation slice has not been specified or approved.
+- Feature Spec #1 is drafted but awaits Sarah's approval; implementation is blocked until approval.
 - Exact storage schema and concurrent-write behavior remain open.
 - Exact automatic checkpoint event classification and model-call budget remain open.
-- Release/package/licensing decisions remain open.
+- Release/package/licensing decisions remain open and belong to Feature Spec #15, not Spec #1.
 
 ## Resolved issues
 

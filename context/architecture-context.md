@@ -28,7 +28,7 @@ No custom Pi client, hosted database, mandatory external service, or telemetry i
 
 ## Storage Model
 
-The exact file names and schema are open until the first implementation specification. The settled shape is:
+The exact file names and schema are open until Feature Spec #2 — Project Identity & Local Storage. The settled shape is:
 
 - A project record keyed by canonical project root.
 - A separate human note that generated updates cannot overwrite.
@@ -58,7 +58,7 @@ Pi lifecycle and tool events can record facts without a model: session start/sto
 
 When a meaningful change reaches an idle boundary, the extension may send one bounded hidden follow-up to the active agent asking it to call a structured Note to Self update tool and stop. The update tool accepts generated fields only and stores the evidence source. A missing response marks the summary stale; it must not trigger an endless loop.
 
-The exact event classification, cooldown, retry behavior, and model-call budget belong in the first feature specification. A separate background summarizer is not required for the initial design.
+The exact event classification and evidence model belong in Feature Spec #7 — Deterministic Activity & Freshness. Cooldown, retry behavior, model-call budget, and recursion prevention belong in Feature Spec #9 — Automatic Semantic Checkpoints. A separate background summarizer is not required for the initial design.
 
 ## Invariants
 

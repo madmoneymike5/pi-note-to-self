@@ -61,7 +61,7 @@ An enabled blocker is always shown. When clear, its value is `Blocker: NONE`; it
 
 ## 8. Open decisions
 
-- Exact first implementation slice and feature specification.
+- Approval of the drafted Feature Spec #1 and its accepted verification evidence.
 - Stable storage path, schema, migrations, and concurrent-write behavior.
 - Exact deterministic trigger list and checkpoint cooldown/retry rules.
 - Whether the human note is sent to the active model by default.
@@ -69,7 +69,19 @@ An enabled blocker is always shown. When clear, its value is `Blocker: NONE`; it
 - Package, license, release, registry, and future publication policy.
 - Whether a curated checkpoint may later be exported to Chronicle.
 
-## 9. Approved feature-spec sequencing for release
+## 9. Feature Spec #1 planning inputs
+
+Sarah selected these inputs for the draft; they authorize the draft's shape, not implementation:
+
+- Target Pi compatibility: exact installed development and smoke-test target `@earendil-works/pi-coding-agent` `0.85.1`.
+- Node floor: `>=22.19.0`, inherited from Pi `0.85.1`'s engine requirement.
+- Package manager: npm with a committed `package-lock.json` and clean-install verification.
+- Tooling shape: strict TypeScript, Node's built-in test runner, ESLint with TypeScript support, and a truthful build/check path that typechecks and dry-runs package assembly without committing to an emitted `dist` artifact.
+- Development package remains private and is not a publication or CD decision.
+
+Feature Spec #1 is currently **Draft — awaiting Sarah's approval**. Until approval, no extension implementation is authorized.
+
+## 10. Approved feature-spec sequencing for release
 
 Sarah approved separating the release work into two later feature specifications:
 
@@ -80,6 +92,6 @@ Sarah approved separating the release work into two later feature specifications
 
 The initial CD design is Continuous Delivery with a manual publish gate. Automatic deployment on every merge is not approved. The actual package, registry, version, credentials, and publication details remain open until Feature Spec #15.
 
-## 10. Decision rule
+## 11. Decision rule
 
 The latest explicit answer from Sarah wins. A working suggestion is not a settled decision. If an open choice is consequential, stop and ask before affected implementation.
