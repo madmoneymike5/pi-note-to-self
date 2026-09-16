@@ -59,7 +59,8 @@ See [current issues](current-issues.md), the [planning decision ledger](planning
 
 - Branch: `feature-01-extension-foundation`.
 - Worktree: `/home/sarah-taylor/Dev/worktrees/pi-note-to-self--f913adf4/feature-01-foundation`.
-- Changed files: package manifest/lock, strict TypeScript and ESLint config, empty extension entry, focused loadability test, native Pi RPC smoke runner, `.gitignore`, CI native command, and this tracker.
+- Changed files: package manifest/lock, strict TypeScript and ESLint config, empty extension entry, focused loadability test, isolated native Pi RPC smoke runner, `.gitignore`, CI native command, status docs, and this tracker.
+- Fresh read-only Codex fallback review returned `CHANGES`; smoke isolation/termination and stale status documentation findings were fixed in the review commit. The durable `lao codie-review` queue was unavailable through Keystone.
 - Review limitation: GitHub Actions, OpenGrep, Gitleaks, Trivy, and advisory bots were not run locally; no push or pull request was opened.
 - Future package name/publication contract remains intentionally unresolved for Feature Spec #15.
 

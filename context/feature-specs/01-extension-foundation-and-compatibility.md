@@ -1,12 +1,12 @@
 # Feature Specification 01 — Extension Foundation & Compatibility
 
-**Status:** Approved — implementation not started
+**Status:** Approved — implementation complete; handoff pending
 **Product:** Note to Self
 **Proposed implementation branch:** `feature-01-extension-foundation`
 **Proposed implementation worktree:** `/home/sarah-taylor/Dev/worktrees/pi-note-to-self--f913adf4/feature-01-foundation`
 **Authoring worktree:** `spec-01-foundation` (removed after documentation merge)
 
-This document defines the first implementation slice. Sarah approved this scope; implementation has not started by explicit instruction.
+This document defines the first implementation slice. Sarah approved this scope; implementation is complete on the assigned feature branch, with integration pending authorization.
 
 ## 1. Purpose
 
@@ -26,7 +26,7 @@ Read and apply:
 - [Progress tracker](../progress-tracker.md)
 - [Planning ledger — Sections 2, 7, 8, 9, and 11](../planning-decision-ledger.md)
 
-This slice has no product-feature dependency. Its implementation is intentionally not started yet and remains bounded by the choices and exclusions below.
+This slice has no product-feature dependency. Its implementation remains bounded by the choices and exclusions below.
 
 ## 3. User/System Outcome
 
@@ -112,7 +112,7 @@ Add a small smoke command that starts the installed Pi binary with:
 - `--no-extensions` so discovery is disabled; and
 - `--extension`/`-e` pointing directly at this slice's entry point.
 
-The smoke runner must use a non-interactive startup path that does not require a model request, credentials, or changes to global/project Pi settings. It must fail on process startup failure or extension-load failure and must clean up its child process. The exact RPC/startup readiness signal may be chosen during implementation from Pi `0.85.1`'s documented runtime behavior; it must be recorded in the implementation handoff.
+The smoke runner must use a non-interactive startup path that does not require a model request, credentials, or changes to global/project Pi settings. It must fail on process startup failure or extension-load failure and must clean up its child process. Implementation uses Pi `0.85.1` JSON-RPC `get_state` success as readiness, an isolated temporary `PI_CODING_AGENT_DIR`, and bounded SIGTERM/SIGKILL cleanup.
 
 ### 5.6 Repository and CI gate
 
@@ -181,15 +181,15 @@ Rejected checks:
 
 The approved slice is accepted as implemented only when the implementation can demonstrate:
 
-- [ ] The future implementation branch and worktree named at the top are used; this documentation worktree is not reused for code.
-- [ ] A clean `npm ci --ignore-scripts` succeeds without relying on global TypeScript or ESLint binaries.
-- [ ] Pi `0.85.1` is the tested compatibility target and Node's declared floor is enforced by the manifest.
-- [ ] `npm run typecheck`, `npm run lint`, `npm test`, `npm run build`, `npm run smoke`, and `npm run check` all execute real checks.
-- [ ] The extension loads through Pi's `--no-session --no-extensions --extension` path without a model request or global configuration change.
-- [ ] The package remains private and no public release or CD action occurs.
-- [ ] GitHub's native review-stack gate runs the clean install plus aggregate project check.
-- [ ] Existing OpenGrep, Gitleaks, Trivy, and repository checks remain enabled.
-- [ ] The implementation commit and any review fixes are committed on the assigned feature branch, with a handoff listing checks, limitations, and unresolved decisions.
+- [x] The future implementation branch and worktree named at the top are used; this documentation worktree is not reused for code.
+- [x] A clean `npm ci --ignore-scripts` succeeds without relying on global TypeScript or ESLint binaries.
+- [x] Pi `0.85.1` is the tested compatibility target and Node's declared floor is enforced by the manifest.
+- [x] `npm run typecheck`, `npm run lint`, `npm test`, `npm run build`, `npm run smoke`, and `npm run check` all execute real checks.
+- [x] The extension loads through Pi's `--no-session --no-extensions --extension` path without a model request or global configuration change.
+- [x] The package remains private and no public release or CD action occurs.
+- [ ] GitHub's native review-stack gate runs the clean install plus aggregate project check; it remains pending because this branch was not pushed.
+- [x] Existing OpenGrep, Gitleaks, Trivy, and repository checks remain enabled.
+- [x] The implementation commit and review fixes are committed on the assigned feature branch, with a handoff listing checks, limitations, and unresolved decisions.
 
 ## 10. Handoff and Review
 
@@ -205,8 +205,11 @@ Sarah has approved this specification. When implementation begins, the following
 
 ## 11. Remaining Implementation Questions
 
-The following are deliberately left for the implementation handoff and later release planning:
+The following remain deliberately open for later release planning:
 
-- The exact compatible release versions for TypeScript, ESLint, TypeScript ESLint, and Node types.
-- The exact RPC/startup readiness signal used by the smoke runner.
 - Whether future package publication will use npm, GitHub Releases, or another approved destination; Feature Spec #15 owns that decision.
+
+Resolved during implementation:
+
+- Compatible TypeScript, ESLint, TypeScript ESLint, and Node type versions are selected in `package.json` and pinned by `package-lock.json`.
+- The smoke runner uses Pi `0.85.1` JSON-RPC `get_state` readiness with isolated temporary agent state and bounded child cleanup.

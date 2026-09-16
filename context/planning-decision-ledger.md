@@ -79,7 +79,7 @@ Sarah selected and approved these inputs for Feature Spec #1:
 - Tooling shape: strict TypeScript, Node's built-in test runner, ESLint with TypeScript support, and a truthful build/check path that typechecks and dry-runs package assembly without committing to an emitted `dist` artifact.
 - Development package remains private and is not a publication or CD decision.
 
-Feature Spec #1 is **Approved — implementation not started**. Sarah explicitly instructed that implementation must not begin yet.
+Feature Spec #1 is **Approved — implementation complete; handoff pending** on `feature-01-extension-foundation`. Sarah's later explicit implementation instruction superseded the earlier planning pause; integration remains unauthorized.
 
 ## 10. Approved feature-spec sequencing for release
 
