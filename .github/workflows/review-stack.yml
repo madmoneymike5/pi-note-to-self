@@ -14,6 +14,6 @@ jobs:
     uses: madmoneymike5/review-stack-runtime/.github/workflows/review-stack.yml@e32b9fa29dbcf65a289c3fd066d42cd7cb2f094f
     with:
       native-command: >-
-        python3 scripts/check_repository.py
+        npm ci --ignore-scripts && npm run check
       opengrep-excludes: ""
       gitleaks-excludes: |-
