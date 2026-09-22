@@ -8,7 +8,7 @@ Feature Spec #1 — Extension Foundation & Compatibility is implemented and veri
 
 ## Current Goal
 
-Hand off the committed feature branch without integrating, pushing, publishing, or removing its worktree.
+Finish reviewing the pushed branch. Do not merge it, publish it, or delete its worktree yet.
 
 ## Completed
 
@@ -34,14 +34,15 @@ Hand off the committed feature branch without integrating, pushing, publishing, 
 
 ## Next Up
 
-1. Sarah reviews the committed handoff.
-2. Keep Feature Specs #2–#16 and package publication deferred until their approved scopes.
-3. Integrate, push, or remove the worktree only after Sarah authorizes it.
+1. Wait for GitHub Actions, CodeRabbit, and Kodus to finish checking PR #1.
+2. Sarah reviews PR #1 and decides whether to merge it.
+3. Keep Features #2–#16 and package publishing on hold until their approved work begins.
 
 ## Evidence and Gaps
 
-- CI run: [review stack](https://github.com/madmoneymike5/pi-note-to-self/actions/runs/35007245540).
-- Security deep scan: [TruffleHog](https://github.com/madmoneymike5/pi-note-to-self/actions/runs/35007331494).
+- Pull request: [#1](https://github.com/madmoneymike5/pi-note-to-self/pull/1). GitHub Actions, CodeRabbit, and Kodus have not finished checking it.
+- Earlier bootstrap CI run: [review stack](https://github.com/madmoneymike5/pi-note-to-self/actions/runs/35007245540).
+- Earlier security deep scan: [TruffleHog](https://github.com/madmoneymike5/pi-note-to-self/actions/runs/35007331494).
 - Clean `npm ci --ignore-scripts` followed by `npm run check` passed in the assigned worktree under Node 22.23.2/npm 10.9.8; the review-stack native gate now provisions and SHA-verifies the same Node 22.23.2 toolchain before running those commands.
 - Aggregate check passed typecheck, typed ESLint, focused Node test, package dry-run, Pi smoke, and `scripts/check_repository.py` with 28 tracked files.
 - The smoke check resolves the manifest-declared entry, correlates Pi 0.85.1 RPC `get_state` by request ID, uses `--no-session --no-extensions --offline --extension`, isolates temporary agent state, bounds `pi --version`, and makes no model request.
@@ -62,7 +63,7 @@ See [current issues](current-issues.md), the [planning decision ledger](planning
 - Worktree: `/home/sarah-taylor/Dev/worktrees/pi-note-to-self--f913adf4/feature-01-foundation`.
 - Changed files: package manifest/lock, strict TypeScript and ESLint config, shared contained-entry resolver, empty extension entry, focused loadability test, isolated native Pi RPC smoke runner, `.gitignore`, pinned CI native command, status docs, and this tracker.
 - Fresh read-only Codex fallback review returned `CHANGES`; smoke isolation/termination, stale status documentation, manifest containment, and Node-version provisioning findings were fixed. The durable `lao codie-review` queue was unavailable through Keystone.
-- Review limitation: GitHub Actions, OpenGrep, Gitleaks, Trivy, and advisory bots were not run locally; no push or pull request was opened.
+- Review limitation: I did not run the GitHub checks on this computer. PR #1 is open, and those checks are still waiting.
 - Future package name/publication contract remains intentionally unresolved for Feature Spec #15.
 
 This tracker records actual work and evidence, not approval of future features. Keep human decisions in the ledger and current implementation limits in the active feature specification.

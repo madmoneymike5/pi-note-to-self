@@ -187,7 +187,7 @@ The approved slice is accepted as implemented only when the implementation can d
 - [x] `npm run typecheck`, `npm run lint`, `npm test`, `npm run build`, `npm run smoke`, and `npm run check` all execute real checks.
 - [x] The extension loads through Pi's `--no-session --no-extensions --extension` path without a model request or global configuration change.
 - [x] The package remains private and no public release or CD action occurs.
-- [ ] GitHub's native review-stack gate runs the clean install plus aggregate project check; it remains pending because this branch was not pushed.
+- [ ] GitHub's review check runs the clean install and full project check; PR #1 is open and the check is still waiting.
 - [x] Existing OpenGrep, Gitleaks, Trivy, and repository checks remain enabled.
 - [x] The implementation commit and review fixes are committed on the assigned feature branch, with a handoff listing checks, limitations, and unresolved decisions.
 
