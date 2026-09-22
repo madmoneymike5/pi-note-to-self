@@ -1,12 +1,12 @@
 # Feature Specifications
 
-Feature Spec #1 is approved but implementation has not started; no implementation worktree exists yet.
+Feature Spec #1 is implemented on its assigned branch; handoff is pending integration authorization.
 
 ## Proposed Feature-Spec Inventory
 
-Entries without their own document are planning entries, not written specifications. Feature Spec #1 is approved but not implemented:
+Entries without their own document are planning entries, not written specifications. Feature Spec #1 is the only implemented specification:
 
-1. [Extension Foundation & Compatibility](01-extension-foundation-and-compatibility.md) — **Approved, implementation not started**
+1. [Extension Foundation & Compatibility](01-extension-foundation-and-compatibility.md) — **Approved, implemented; handoff pending**
 2. Project Identity & Local Storage
 3. Human Note Lifecycle
 4. Core Widget & Commands
