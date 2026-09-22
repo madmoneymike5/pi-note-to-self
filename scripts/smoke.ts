@@ -95,6 +95,7 @@ async function runSmoke(): Promise<string> {
       let terminationRequested = false;
       let timedOut = false;
       let stdinError: Error | undefined;
+      let killEscalated = false;
       let killTimer: NodeJS.Timeout | undefined;
 
       const timeout = setTimeout(() => {
@@ -112,7 +113,10 @@ async function runSmoke(): Promise<string> {
         terminationRequested = true;
         child.kill("SIGTERM");
         killTimer = setTimeout(() => {
-          if (!closed) child.kill("SIGKILL");
+          if (!closed) {
+            killEscalated = true;
+            child.kill("SIGKILL");
+          }
         }, 1_000);
       };
 
@@ -144,13 +148,12 @@ async function runSmoke(): Promise<string> {
           if (closed) return;
           closed = true;
           cleanup();
-          if (stdinError) {
-            reject(
-              new Error(`could not send get_state to pi: ${stdinError.message}`),
-            );
-          } else if (
+          if (
             ready &&
-            (code === 0 || code === 143 || signal === "SIGTERM")
+            (code === 0 ||
+              code === 143 ||
+              signal === "SIGTERM" ||
+              (killEscalated && (code === 137 || signal === "SIGKILL")))
           ) {
             resolve();
           } else if (ready) {
@@ -159,6 +162,10 @@ async function runSmoke(): Promise<string> {
                 `pi exited after get_state with code ${code ?? "unknown"} ` +
                   `and signal ${signal ?? "none"}`,
               ),
+            );
+          } else if (stdinError) {
+            reject(
+              new Error(`could not send get_state to pi: ${stdinError.message}`),
             );
           } else if (timedOut) {
             reject(
@@ -176,7 +183,7 @@ async function runSmoke(): Promise<string> {
       );
 
       child.stdin.once("error", (error: Error) => {
-        if (closed || stdinError) return;
+        if (closed || ready || stdinError) return;
         stdinError = error;
         terminate();
       });
