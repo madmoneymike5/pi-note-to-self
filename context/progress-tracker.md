@@ -1,14 +1,14 @@
 # Progress Tracker
 
-Last updated: Feature Spec #1 implementation complete; handoff ready.
+Last updated: Feature Spec #1 implemented, reviewed, and merged.
 
 ## Current Phase
 
-Feature Spec #1 — Extension Foundation & Compatibility is implemented and verified in its assigned linked worktree.
+Feature Spec #1 — Extension Foundation & Compatibility is complete and merged into `main`.
 
 ## Current Goal
 
-Finish reviewing the pushed branch. Do not merge it, publish it, or delete its worktree yet.
+Define and review Feature Spec #2. No implementation is currently active.
 
 ## Completed
 
@@ -27,20 +27,24 @@ Finish reviewing the pushed branch. Do not merge it, publish it, or delete its w
 - Feature Spec #1 implementation worktree created at `/home/sarah-taylor/Dev/worktrees/pi-note-to-self--f913adf4/feature-01-foundation` on branch `feature-01-extension-foundation`.
 - Private ESM package foundation added with pinned Pi 0.85.1 compatibility, strict TypeScript, typed ESLint, focused entry-point test, package dry-run, native RPC smoke check, and aggregate check scripts.
 - Review-stack native command changed to clean install plus `npm run check`.
+- Feature Spec #1 implementation completed on `feature-01-extension-foundation`.
+- PR #1 was reviewed by the Review Stack, CodeRabbit, and Kodus, then merged into `main` at `574ca5d`.
+- The implementation worktree was removed after integration; only the clean primary checkout remains.
 
 ## In Progress
 
-- Final clean-install verification, repository check, worktree audit, and bounded handoff review for Feature Spec #1 are complete.
+- No implementation is in progress. Feature Spec #1 is complete and merged.
 
 ## Next Up
 
-1. Wait for GitHub Actions, CodeRabbit, and Kodus to finish checking PR #1.
-2. Sarah reviews PR #1 and decides whether to merge it.
-3. Keep Features #2–#16 and package publishing on hold until their approved work begins.
+1. Define and review Feature Spec #2 — Project Identity & Local Storage.
+2. Create its assigned implementation worktree only after approval and an explicit start instruction.
+3. Keep Features #3–#16 and package publishing on hold until their approved work begins.
 
 ## Evidence and Gaps
 
-- Pull request: [#1](https://github.com/madmoneymike5/pi-note-to-self/pull/1). GitHub Actions, CodeRabbit, and Kodus have not finished checking it.
+- Pull request: [#1](https://github.com/madmoneymike5/pi-note-to-self/pull/1), merged at `574ca5d`.
+- PR Review Stack and post-merge main CI: [Review Stack](https://github.com/madmoneymike5/pi-note-to-self/actions/runs/35795639149).
 - Earlier bootstrap CI run: [review stack](https://github.com/madmoneymike5/pi-note-to-self/actions/runs/35007245540).
 - Earlier security deep scan: [TruffleHog](https://github.com/madmoneymike5/pi-note-to-self/actions/runs/35007331494).
 - Clean `npm ci --ignore-scripts` followed by `npm run check` passed in the assigned worktree under Node 22.23.2/npm 10.9.8; the review-stack native gate now provisions and SHA-verifies the same Node 22.23.2 toolchain before running those commands.
@@ -53,6 +57,7 @@ Finish reviewing the pushed branch. Do not merge it, publish it, or delete its w
 - No `.tgz` or `dist/` artifact was created; `.tokensave/` is excluded from package preview.
 - Semantic checkpoint quality, native UI behavior, mouse behavior, storage failure handling, and real Pi model behavior remain unimplemented and untested by design.
 - Package publication, release artifact, registry, and continuous delivery remain deferred to Feature Specs #15–#16.
+- Feature Spec #2 has not been written or started.
 
 ## Open Questions
 
@@ -60,11 +65,11 @@ See [current issues](current-issues.md), the [planning decision ledger](planning
 
 ## Session Notes
 
-- Branch: `feature-01-extension-foundation`.
-- Worktree: `/home/sarah-taylor/Dev/worktrees/pi-note-to-self--f913adf4/feature-01-foundation`.
+- Historical implementation branch: `feature-01-extension-foundation`; merged into `main` at `574ca5d`.
+- Historical implementation worktree `/home/sarah-taylor/Dev/worktrees/pi-note-to-self--f913adf4/feature-01-foundation` was removed after integration.
 - Changed files: package manifest/lock, strict TypeScript and ESLint config, shared contained-entry resolver, empty extension entry, focused loadability test, isolated native Pi RPC smoke runner, `.gitignore`, pinned CI native command, status docs, and this tracker.
 - Fresh read-only Codex fallback review returned `CHANGES`; smoke isolation/termination, stale status documentation, manifest containment, and Node-version provisioning findings were fixed. The durable `lao codie-review` queue was unavailable through Keystone.
-- Review limitation: I did not run the GitHub checks on this computer. PR #1 is open, and those checks are still waiting.
+- GitHub Review Stack, CodeRabbit, and Kodus completed for PR #1; the post-merge main Review Stack also passed.
 - Future package name/publication contract remains intentionally unresolved for Feature Spec #15.
 
 This tracker records actual work and evidence, not approval of future features. Keep human decisions in the ledger and current implementation limits in the active feature specification.

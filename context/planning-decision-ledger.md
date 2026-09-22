@@ -79,7 +79,9 @@ Sarah selected and approved these inputs for Feature Spec #1:
 - Tooling shape: strict TypeScript, Node's built-in test runner, ESLint with TypeScript support, and a truthful build/check path that typechecks and dry-runs package assembly without committing to an emitted `dist` artifact.
 - Development package remains private and is not a publication or CD decision.
 
-Feature Spec #1 is **Approved — implementation complete; handoff pending** on `feature-01-extension-foundation`. Sarah's later explicit implementation instruction superseded the earlier planning pause; integration remains unauthorized.
+Feature Spec #1 is **Implemented, reviewed, and merged**. It was implemented on `feature-01-extension-foundation`, reviewed through [PR #1](https://github.com/madmoneymike5/pi-note-to-self/pull/1), and merged into `main` at `574ca5d`. The PR's Review Stack, CodeRabbit, and Kodus checks completed successfully after the review fixes. The implementation worktree was removed after integration.
+
+The foundation remains intentionally limited to package/runtime compatibility and verification; storage, UI, workstreams, checkpoints, installation, release, and CD remain future feature work.
 
 ## 10. Approved feature-spec sequencing for release
 

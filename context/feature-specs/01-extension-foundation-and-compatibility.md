@@ -1,12 +1,12 @@
 # Feature Specification 01 — Extension Foundation & Compatibility
 
-**Status:** Approved — implementation complete; handoff pending
+**Status:** Implemented, reviewed, and merged
 **Product:** Note to Self
-**Proposed implementation branch:** `feature-01-extension-foundation`
-**Proposed implementation worktree:** `/home/sarah-taylor/Dev/worktrees/pi-note-to-self--f913adf4/feature-01-foundation`
+**Implementation branch:** `feature-01-extension-foundation`
+**Implementation worktree:** removed after integration
 **Authoring worktree:** `spec-01-foundation` (removed after documentation merge)
 
-This document defines the first implementation slice. Sarah approved this scope; implementation is complete on the assigned feature branch, with integration pending authorization.
+This document defines the first implementation slice. Sarah approved the scope; implementation was reviewed through [PR #1](https://github.com/madmoneymike5/pi-note-to-self/pull/1) and merged into `main` at `574ca5d`.
 
 ## 1. Purpose
 
@@ -187,21 +187,23 @@ The approved slice is accepted as implemented only when the implementation can d
 - [x] `npm run typecheck`, `npm run lint`, `npm test`, `npm run build`, `npm run smoke`, and `npm run check` all execute real checks.
 - [x] The extension loads through Pi's `--no-session --no-extensions --extension` path without a model request or global configuration change.
 - [x] The package remains private and no public release or CD action occurs.
-- [ ] GitHub's review check runs the clean install and full project check; PR #1 is open and the check is still waiting.
+- [x] PR #1's GitHub Review Stack passed the clean install, full project check, and deterministic security gates; the post-merge `main` run also passed.
 - [x] Existing OpenGrep, Gitleaks, Trivy, and repository checks remain enabled.
 - [x] The implementation commit and review fixes are committed on the assigned feature branch, with a handoff listing checks, limitations, and unresolved decisions.
 
 ## 10. Handoff and Review
 
-Sarah has approved this specification. When implementation begins, the following rules apply:
+Implementation completed in the assigned linked worktree and branch, passed the focused checks and Review Stack, received CodeRabbit and Kodus review, and merged through PR #1. The implementation worktree was removed after integration.
 
-1. Work only in the assigned linked worktree and branch.
+Future slices must:
+
+1. Work only in their assigned linked worktree and branch.
 2. Stop and report if the spec does not determine a consequential package, Pi API, security, or process-lifecycle choice.
 3. Keep the primary checkout clean.
-4. Run the focused checks and the repository review stack.
+4. Run focused checks and the repository review stack.
 5. Request the bounded review required by the project workflow before integration.
 6. Do not open, merge, or close a pull request automatically.
-7. Do not integrate or delete the implementation worktree until Sarah authorizes the handoff.
+7. Do not integrate or delete the implementation worktree until the handoff is authorized.
 
 ## 11. Remaining Implementation Questions
 
