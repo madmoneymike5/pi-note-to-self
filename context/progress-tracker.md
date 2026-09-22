@@ -46,6 +46,7 @@ Finish reviewing the pushed branch. Do not merge it, publish it, or delete its w
 - Clean `npm ci --ignore-scripts` followed by `npm run check` passed in the assigned worktree under Node 22.23.2/npm 10.9.8; the review-stack native gate now provisions and SHA-verifies the same Node 22.23.2 toolchain before running those commands.
 - Aggregate check passed typecheck, typed ESLint, focused Node test, package dry-run, Pi smoke, and `scripts/check_repository.py` with 28 tracked files.
 - The smoke check resolves the manifest-declared entry, correlates Pi 0.85.1 RPC `get_state` by request ID, uses `--no-session --no-extensions --offline --extension`, isolates temporary agent state, bounds `pi --version`, and makes no model request.
+- The Pi smoke check now reports broken input and stops the child safely.
 - Adversarial mutation probes reject wrong RPC IDs, hung version probes, `file:///tmp/...`, absolute paths, `../` traversal, directories, missing entries, symlink escapes, and malformed source; the factory test also rejects non-callable/class exports and API access.
 - LSP diagnostics have no actionable findings; package-decoder hints were recorded as false positives because they are the explicit untrusted JSON boundary decoder.
 - Ubuntu 24.04 GitHub runner documentation at the pinned review-stack workflow's current environment lists Node.js 22.23.2, satisfying the >=22.19.0 floor.

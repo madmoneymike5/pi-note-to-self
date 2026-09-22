@@ -94,6 +94,7 @@ async function runSmoke(): Promise<string> {
       let closed = false;
       let terminationRequested = false;
       let timedOut = false;
+      let stdinError: Error | undefined;
       let killTimer: NodeJS.Timeout | undefined;
 
       const timeout = setTimeout(() => {
@@ -143,8 +144,14 @@ async function runSmoke(): Promise<string> {
           if (closed) return;
           closed = true;
           cleanup();
-          // Pi's launcher reports a controlled SIGTERM as 143 on POSIX.
-          if (ready && (code === 0 || code === 143 || signal === "SIGTERM")) {
+          if (stdinError) {
+            reject(
+              new Error(`could not send get_state to pi: ${stdinError.message}`),
+            );
+          } else if (
+            ready &&
+            (code === 0 || code === 143 || signal === "SIGTERM")
+          ) {
             resolve();
           } else if (ready) {
             reject(
@@ -168,6 +175,11 @@ async function runSmoke(): Promise<string> {
         },
       );
 
+      child.stdin.once("error", (error: Error) => {
+        if (closed || stdinError) return;
+        stdinError = error;
+        terminate();
+      });
       child.stdin.write(
         `${JSON.stringify({ id: requestId, type: "get_state" })}\n`,
       );
