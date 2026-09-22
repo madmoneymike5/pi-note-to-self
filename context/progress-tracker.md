@@ -42,10 +42,10 @@ Hand off the committed feature branch without integrating, pushing, publishing, 
 
 - CI run: [review stack](https://github.com/madmoneymike5/pi-note-to-self/actions/runs/35007245540).
 - Security deep scan: [TruffleHog](https://github.com/madmoneymike5/pi-note-to-self/actions/runs/35007331494).
-- Clean `npm ci --ignore-scripts` followed by `npm run check` passed in the assigned worktree under Node 22.23.2/npm 10.9.8.
-- Aggregate check passed typecheck, typed ESLint, focused Node test, package dry-run, Pi smoke, and `scripts/check_repository.py` with 27 tracked files.
+- Clean `npm ci --ignore-scripts` followed by `npm run check` passed in the assigned worktree under Node 22.23.2/npm 10.9.8; the review-stack native gate now provisions and SHA-verifies the same Node 22.23.2 toolchain before running those commands.
+- Aggregate check passed typecheck, typed ESLint, focused Node test, package dry-run, Pi smoke, and `scripts/check_repository.py` with 28 tracked files.
 - The smoke check resolves the manifest-declared entry, correlates Pi 0.85.1 RPC `get_state` by request ID, uses `--no-session --no-extensions --offline --extension`, isolates temporary agent state, bounds `pi --version`, and makes no model request.
-- Adversarial mutation probes reject wrong RPC IDs, hung version probes, manifest drift, and malformed entries; the factory test also rejects non-callable/class exports and API access.
+- Adversarial mutation probes reject wrong RPC IDs, hung version probes, `file:///tmp/...`, absolute paths, `../` traversal, directories, missing entries, symlink escapes, and malformed source; the factory test also rejects non-callable/class exports and API access.
 - LSP diagnostics have no actionable findings; package-decoder hints were recorded as false positives because they are the explicit untrusted JSON boundary decoder.
 - Ubuntu 24.04 GitHub runner documentation at the pinned review-stack workflow's current environment lists Node.js 22.23.2, satisfying the >=22.19.0 floor.
 - No `.tgz` or `dist/` artifact was created; `.tokensave/` is excluded from package preview.
@@ -60,8 +60,8 @@ See [current issues](current-issues.md), the [planning decision ledger](planning
 
 - Branch: `feature-01-extension-foundation`.
 - Worktree: `/home/sarah-taylor/Dev/worktrees/pi-note-to-self--f913adf4/feature-01-foundation`.
-- Changed files: package manifest/lock, strict TypeScript and ESLint config, empty extension entry, focused loadability test, isolated native Pi RPC smoke runner, `.gitignore`, CI native command, status docs, and this tracker.
-- Fresh read-only Codex fallback review returned `CHANGES`; smoke isolation/termination and stale status documentation findings were fixed, followed by the three adversarial smoke/manifest/version fixes. The durable `lao codie-review` queue was unavailable through Keystone.
+- Changed files: package manifest/lock, strict TypeScript and ESLint config, shared contained-entry resolver, empty extension entry, focused loadability test, isolated native Pi RPC smoke runner, `.gitignore`, pinned CI native command, status docs, and this tracker.
+- Fresh read-only Codex fallback review returned `CHANGES`; smoke isolation/termination, stale status documentation, manifest containment, and Node-version provisioning findings were fixed. The durable `lao codie-review` queue was unavailable through Keystone.
 - Review limitation: GitHub Actions, OpenGrep, Gitleaks, Trivy, and advisory bots were not run locally; no push or pull request was opened.
 - Future package name/publication contract remains intentionally unresolved for Feature Spec #15.
 

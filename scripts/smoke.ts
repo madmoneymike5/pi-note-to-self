@@ -9,46 +9,14 @@
 // No model request, credentials, or global/project settings change is required.
 import { randomUUID } from "node:crypto";
 import { execFileSync, spawn } from "node:child_process";
-import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { resolveManifestEntry } from "./manifest-entry.ts";
 
 const expectedPiVersion = "0.85.1";
 const repoRoot = new URL("../", import.meta.url);
 const timeoutMs = Number(process.env.PI_SMOKE_TIMEOUT_MS ?? 60_000);
-
-async function extensionEntry(): Promise<string> {
-  let manifest: unknown;
-  try {
-    manifest = JSON.parse(
-      await readFile(new URL("package.json", repoRoot), "utf8"),
-    );
-  } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : String(error);
-    throw new Error(`could not read package.json: ${message}`);
-  }
-  if (
-    typeof manifest !== "object" ||
-    manifest === null ||
-    !("pi" in manifest) ||
-    typeof manifest.pi !== "object" ||
-    manifest.pi === null ||
-    !("extensions" in manifest.pi) ||
-    !Array.isArray(manifest.pi.extensions)
-  ) {
-    throw new Error("package.json must declare pi.extensions");
-  }
-  const extensions: readonly unknown[] = manifest.pi.extensions;
-  if (extensions.length !== 1) {
-    throw new Error("package.json must declare exactly one pi.extensions entry");
-  }
-  const entry = extensions[0];
-  if (typeof entry !== "string" || entry.length === 0) {
-    throw new Error("package.json pi.extensions entry must be non-empty");
-  }
-  return fileURLToPath(new URL(entry, repoRoot));
-}
 
 function isReadyResponse(line: string, requestId: string): boolean {
   let value: unknown;
@@ -94,7 +62,7 @@ async function runSmoke(): Promise<string> {
 
   const agentDir = await mkdtemp(join(tmpdir(), "pi-note-to-self-smoke-"));
   try {
-    const entry = await extensionEntry();
+    const entry = await resolveManifestEntry(repoRoot);
     const version = piVersion(agentDir);
     if (version !== expectedPiVersion) {
       throw new Error(
@@ -112,7 +80,7 @@ async function runSmoke(): Promise<string> {
         "--no-extensions",
         "--offline",
         "--extension",
-        entry,
+        entry.path,
       ],
       {
         env: { ...process.env, PI_CODING_AGENT_DIR: agentDir },
@@ -204,7 +172,7 @@ async function runSmoke(): Promise<string> {
         `${JSON.stringify({ id: requestId, type: "get_state" })}\n`,
       );
     });
-    return entry;
+    return entry.path;
   } finally {
     await rm(agentDir, { recursive: true, force: true });
   }
