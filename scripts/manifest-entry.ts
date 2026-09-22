@@ -7,6 +7,10 @@ export interface ManifestEntry {
   url: URL;
 }
 
+function toErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
+}
+
 function isOutsideRoot(rootPath: string, candidatePath: string): boolean {
   const relativePath = relative(rootPath, candidatePath);
   return (
@@ -25,8 +29,7 @@ export async function resolveManifestEntry(repoRoot: URL): Promise<ManifestEntry
       await readFile(join(rootPath, "package.json"), "utf8"),
     );
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : String(error);
-    throw new Error(`could not read package.json: ${message}`);
+    throw new Error(`could not read package.json: ${toErrorMessage(error)}`);
   }
 
   if (
@@ -70,8 +73,9 @@ export async function resolveManifestEntry(repoRoot: URL): Promise<ManifestEntry
   try {
     realCandidatePath = await realpath(candidatePath);
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : String(error);
-    throw new Error(`extension entry does not exist: ${entry} (${message})`);
+    throw new Error(
+      `extension entry does not exist: ${entry} (${toErrorMessage(error)})`,
+    );
   }
   if (isOutsideRoot(rootPath, realCandidatePath)) {
     throw new Error(`extension entry escapes repository root: ${entry}`);
@@ -81,8 +85,9 @@ export async function resolveManifestEntry(repoRoot: URL): Promise<ManifestEntry
   try {
     candidateStat = await stat(realCandidatePath);
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : String(error);
-    throw new Error(`could not inspect extension entry: ${entry} (${message})`);
+    throw new Error(
+      `could not inspect extension entry: ${entry} (${toErrorMessage(error)})`,
+    );
   }
   if (!candidateStat.isFile()) {
     throw new Error(`extension entry must be a regular file: ${entry}`);
