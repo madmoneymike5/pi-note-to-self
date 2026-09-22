@@ -44,8 +44,9 @@ Hand off the committed feature branch without integrating, pushing, publishing, 
 - Security deep scan: [TruffleHog](https://github.com/madmoneymike5/pi-note-to-self/actions/runs/35007331494).
 - Clean `npm ci --ignore-scripts` followed by `npm run check` passed in the assigned worktree under Node 22.23.2/npm 10.9.8.
 - Aggregate check passed typecheck, typed ESLint, focused Node test, package dry-run, Pi smoke, and `scripts/check_repository.py` with 27 tracked files.
-- The smoke check uses Pi 0.85.1 RPC `get_state` readiness with `--no-session --no-extensions --offline --extension`; it makes no model request and verifies exact Pi version.
-- LSP diagnostics found no errors or warnings in changed source/config files.
+- The smoke check resolves the manifest-declared entry, correlates Pi 0.85.1 RPC `get_state` by request ID, uses `--no-session --no-extensions --offline --extension`, isolates temporary agent state, bounds `pi --version`, and makes no model request.
+- Adversarial mutation probes reject wrong RPC IDs, hung version probes, manifest drift, and malformed entries; the factory test also rejects non-callable/class exports and API access.
+- LSP diagnostics have no actionable findings; package-decoder hints were recorded as false positives because they are the explicit untrusted JSON boundary decoder.
 - Ubuntu 24.04 GitHub runner documentation at the pinned review-stack workflow's current environment lists Node.js 22.23.2, satisfying the >=22.19.0 floor.
 - No `.tgz` or `dist/` artifact was created; `.tokensave/` is excluded from package preview.
 - Semantic checkpoint quality, native UI behavior, mouse behavior, storage failure handling, and real Pi model behavior remain unimplemented and untested by design.
@@ -60,7 +61,7 @@ See [current issues](current-issues.md), the [planning decision ledger](planning
 - Branch: `feature-01-extension-foundation`.
 - Worktree: `/home/sarah-taylor/Dev/worktrees/pi-note-to-self--f913adf4/feature-01-foundation`.
 - Changed files: package manifest/lock, strict TypeScript and ESLint config, empty extension entry, focused loadability test, isolated native Pi RPC smoke runner, `.gitignore`, CI native command, status docs, and this tracker.
-- Fresh read-only Codex fallback review returned `CHANGES`; smoke isolation/termination and stale status documentation findings were fixed in the review commit. The durable `lao codie-review` queue was unavailable through Keystone.
+- Fresh read-only Codex fallback review returned `CHANGES`; smoke isolation/termination and stale status documentation findings were fixed, followed by the three adversarial smoke/manifest/version fixes. The durable `lao codie-review` queue was unavailable through Keystone.
 - Review limitation: GitHub Actions, OpenGrep, Gitleaks, Trivy, and advisory bots were not run locally; no push or pull request was opened.
 - Future package name/publication contract remains intentionally unresolved for Feature Spec #15.
 

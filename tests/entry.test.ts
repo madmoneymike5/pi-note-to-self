@@ -27,7 +27,10 @@ void test("pi manifest names an existing entry that exports a callable default f
   const manifest: unknown = JSON.parse(
     await readFile(new URL("package.json", repoRoot), "utf8"),
   );
-  assert.ok(isPackageManifest(manifest), "package.json must declare pi.extensions");
+  assert.ok(
+    isPackageManifest(manifest),
+    "package.json must declare pi.extensions",
+  );
   assert.equal(
     manifest.pi.extensions.length,
     1,
@@ -46,9 +49,22 @@ void test("pi manifest names an existing entry that exports a callable default f
     typeof mod === "object" && mod !== null && "default" in mod,
     `entry ${entry} must expose a default export`,
   );
+  const factory = mod.default;
   assert.equal(
-    typeof mod.default,
+    typeof factory,
     "function",
     `entry ${entry} must export a callable default extension factory`,
+  );
+  if (typeof factory !== "function") return;
+  const throwingPi = new Proxy(
+    {},
+    {
+      get() {
+        throw new Error("foundation factory accessed ExtensionAPI");
+      },
+    },
+  );
+  assert.doesNotThrow(() =>
+    Reflect.apply(factory, undefined, [throwingPi]),
   );
 });

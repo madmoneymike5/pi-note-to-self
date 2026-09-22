@@ -7,17 +7,50 @@
 // command; a success response proves the extension loaded. Pi 0.85.1 exits
 // with code 1 in non-interactive mode when an extension fails to load.
 // No model request, credentials, or global/project settings change is required.
+import { randomUUID } from "node:crypto";
 import { execFileSync, spawn } from "node:child_process";
-import { mkdtemp, rm } from "node:fs/promises";
+import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const expectedPiVersion = "0.85.1";
-const entry = fileURLToPath(new URL("../src/index.ts", import.meta.url));
+const repoRoot = new URL("../", import.meta.url);
 const timeoutMs = Number(process.env.PI_SMOKE_TIMEOUT_MS ?? 60_000);
 
-function isReadyResponse(line: string): boolean {
+async function extensionEntry(): Promise<string> {
+  let manifest: unknown;
+  try {
+    manifest = JSON.parse(
+      await readFile(new URL("package.json", repoRoot), "utf8"),
+    );
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(`could not read package.json: ${message}`);
+  }
+  if (
+    typeof manifest !== "object" ||
+    manifest === null ||
+    !("pi" in manifest) ||
+    typeof manifest.pi !== "object" ||
+    manifest.pi === null ||
+    !("extensions" in manifest.pi) ||
+    !Array.isArray(manifest.pi.extensions)
+  ) {
+    throw new Error("package.json must declare pi.extensions");
+  }
+  const extensions: readonly unknown[] = manifest.pi.extensions;
+  if (extensions.length !== 1) {
+    throw new Error("package.json must declare exactly one pi.extensions entry");
+  }
+  const entry = extensions[0];
+  if (typeof entry !== "string" || entry.length === 0) {
+    throw new Error("package.json pi.extensions entry must be non-empty");
+  }
+  return fileURLToPath(new URL(entry, repoRoot));
+}
+
+function isReadyResponse(line: string, requestId: string): boolean {
   let value: unknown;
   try {
     value = JSON.parse(line);
@@ -28,6 +61,8 @@ function isReadyResponse(line: string): boolean {
     return false;
   }
   return (
+    "id" in value &&
+    value.id === requestId &&
     "type" in value &&
     value.type === "response" &&
     "command" in value &&
@@ -38,25 +73,36 @@ function isReadyResponse(line: string): boolean {
 }
 
 function piVersion(agentDir: string): string {
-  return execFileSync("pi", ["--version"], {
-    encoding: "utf8",
-    env: { ...process.env, PI_CODING_AGENT_DIR: agentDir },
-    stdio: ["ignore", "pipe", "pipe"],
-  }).trim();
+  try {
+    return execFileSync("pi", ["--version"], {
+      encoding: "utf8",
+      env: { ...process.env, PI_CODING_AGENT_DIR: agentDir },
+      killSignal: "SIGKILL",
+      stdio: ["ignore", "pipe", "pipe"],
+      timeout: Math.min(timeoutMs, 10_000),
+    }).trim();
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(`could not verify pi version: ${message}`);
+  }
 }
 
-async function runSmoke(): Promise<void> {
+async function runSmoke(): Promise<string> {
   if (!Number.isFinite(timeoutMs) || timeoutMs <= 0) {
     throw new Error("PI_SMOKE_TIMEOUT_MS must be a positive number");
   }
 
   const agentDir = await mkdtemp(join(tmpdir(), "pi-note-to-self-smoke-"));
   try {
+    const entry = await extensionEntry();
     const version = piVersion(agentDir);
     if (version !== expectedPiVersion) {
-      throw new Error(`expected pi ${expectedPiVersion}, found ${version || "unknown"}`);
+      throw new Error(
+        `expected pi ${expectedPiVersion}, found ${version || "unknown"}`,
+      );
     }
 
+    const requestId = randomUUID();
     const child = spawn(
       "pi",
       [
@@ -114,7 +160,7 @@ async function runSmoke(): Promise<void> {
         while (newline >= 0) {
           const line = output.slice(0, newline).trim();
           output = output.slice(newline + 1);
-          if (line && isReadyResponse(line)) {
+          if (line && isReadyResponse(line, requestId)) {
             ready = true;
             child.stdin.end();
             terminate();
@@ -123,42 +169,52 @@ async function runSmoke(): Promise<void> {
         }
       });
 
-      child.once("close", (code: number | null, signal: NodeJS.Signals | null) => {
-        if (closed) return;
-        closed = true;
-        cleanup();
-        // Pi's launcher reports a controlled SIGTERM as 143 on POSIX.
-        if (ready && (code === 0 || code === 143 || signal === "SIGTERM")) {
-          resolve();
-        } else if (ready) {
-          reject(
-            new Error(
-              `pi exited after get_state with code ${code ?? "unknown"} ` +
-                `and signal ${signal ?? "none"}`,
-            ),
-          );
-        } else if (timedOut) {
-          reject(new Error(`pi did not answer get_state within ${timeoutMs} ms`));
-        } else {
-          reject(
-            new Error(
-              `pi exited with code ${code ?? "unknown"} before answering get_state ` +
-                "(extension load failure? see stderr above)",
-            ),
-          );
-        }
-      });
+      child.once(
+        "close",
+        (code: number | null, signal: NodeJS.Signals | null) => {
+          if (closed) return;
+          closed = true;
+          cleanup();
+          // Pi's launcher reports a controlled SIGTERM as 143 on POSIX.
+          if (ready && (code === 0 || code === 143 || signal === "SIGTERM")) {
+            resolve();
+          } else if (ready) {
+            reject(
+              new Error(
+                `pi exited after get_state with code ${code ?? "unknown"} ` +
+                  `and signal ${signal ?? "none"}`,
+              ),
+            );
+          } else if (timedOut) {
+            reject(
+              new Error(`pi did not answer get_state within ${timeoutMs} ms`),
+            );
+          } else {
+            reject(
+              new Error(
+                `pi exited with code ${code ?? "unknown"} before answering get_state ` +
+                  "(extension load failure? see stderr above)",
+              ),
+            );
+          }
+        },
+      );
 
-      child.stdin.write('{"id":"smoke-1","type":"get_state"}\n');
+      child.stdin.write(
+        `${JSON.stringify({ id: requestId, type: "get_state" })}\n`,
+      );
     });
+    return entry;
   } finally {
     await rm(agentDir, { recursive: true, force: true });
   }
 }
 
 try {
-  await runSmoke();
-  process.stdout.write(`pi smoke check passed: extension loaded via ${entry}\n`);
+  const entry = await runSmoke();
+  process.stdout.write(
+    `pi smoke check passed: extension loaded via ${entry}\n`,
+  );
 } catch (error: unknown) {
   const message = error instanceof Error ? error.message : String(error);
   console.error(`pi smoke check failed: ${message}`);
