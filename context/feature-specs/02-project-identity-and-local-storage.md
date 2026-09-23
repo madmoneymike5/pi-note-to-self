@@ -1,12 +1,12 @@
 # Feature Specification 02 — Project Identity & Local Storage
 
-**Status:** Draft — awaiting approval
+**Status:** Approved — implementation not started
 **Product:** Note to Self
 **Proposed implementation branch:** `feature-02-project-identity-storage`
 **Proposed implementation worktree:** `/home/sarah-taylor/Dev/worktrees/pi-note-to-self--f913adf4/feature-02-project-identity-storage`
 **Authoring worktree:** `spec-02-storage`
 
-This document defines the second implementation slice. It establishes stable project identity and the private local storage boundary needed by later Note to Self features. It does not implement user-facing note editing, workstreams, widgets, commands, activity tracking, or semantic checkpoints.
+This document defines the second implementation slice. Sarah approved its scope and choices; implementation remains paused until she explicitly starts it. It establishes stable project identity and the private local storage boundary needed by later Note to Self features. It does not implement user-facing note editing, workstreams, widgets, commands, activity tracking, or semantic checkpoints.
 
 ## 1. Purpose
 
@@ -42,9 +42,9 @@ When this slice is implemented:
 6. Malformed or newer unsupported records remain recoverable and are never silently replaced with empty state.
 7. No raw transcript, complete tool output, credential, provider token, or repository file is copied into the store.
 
-## 4. Proposed Choices
+## 4. Approved Choices
 
-These are the proposed choices for Sarah's approval:
+These choices are approved for implementation. Implementation remains paused until Sarah explicitly starts this feature.
 
 - **Identity source:** when the cwd is inside a normal Git repository or linked worktree, resolve and canonicalize Git's common directory. Use that path as the shared project identity input; return the current worktree root transiently for later workstream logic, but do not persist it as shared project state in this slice. Outside Git, use the normalized real path of the cwd. Do not use a repository display name, remote URL, branch name, or network lookup as the primary identity.
 - **Identity key:** hash the UTF-8 string `git-common:<canonical-common-directory>` for Git or `cwd:<canonical-cwd>` for non-Git fallback with SHA-256 and encode it as lowercase hexadecimal. The domain prefix prevents a Git path and cwd fallback from colliding; the canonical identity path remains in the project record for diagnostics but is not used as a filename.
@@ -183,7 +183,7 @@ Rejected checks:
 
 ## 9. Acceptance Criteria
 
-This draft is accepted for implementation only when Sarah approves it and the implementation can demonstrate:
+This approved slice may begin implementation only after Sarah's explicit start instruction and can be accepted only when the implementation demonstrates:
 
 - [ ] The implementation uses the assigned linked worktree and branch, not this documentation worktree.
 - [ ] Git-common-directory and non-Git fallback identity resolution are deterministic, validated, and collision-resistant for distinct canonical identity paths; linked worktrees share one key.
@@ -199,7 +199,7 @@ This draft is accepted for implementation only when Sarah approves it and the im
 
 ## 10. Handoff and Review
 
-This specification is documentation-only and awaits approval. When implementation begins:
+This specification is approved documentation; implementation has not started. When Sarah starts implementation:
 
 1. Use `feature-02-project-identity-storage` in `/home/sarah-taylor/Dev/worktrees/pi-note-to-self--f913adf4/feature-02-project-identity-storage`.
 2. Stop and report if implementation evidence requires a database, a different identity boundary, a different privacy boundary, or a different recovery policy.

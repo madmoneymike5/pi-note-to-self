@@ -28,7 +28,7 @@ No custom Pi client, hosted database, mandatory external service, or telemetry i
 
 ## Storage Model
 
-Feature Spec #2 defines the proposed local storage boundary; its implementation remains unstarted until approval. The current planning shape is:
+Feature Spec #2 defines the approved local storage boundary; its implementation remains unstarted until Sarah explicitly starts it. The approved shape is:
 
 - Resolve the canonical Git common directory for a repository or linked worktree, returning the current worktree root only as transient metadata; fall back to the canonical cwd outside Git.
 - Key each project by the lowercase SHA-256 hash of a domain-separated canonical Git-common or cwd input; display names and branch/worktree names are never identity keys.
@@ -79,7 +79,7 @@ The exact event classification and evidence model belong in Feature Spec #7 — 
 
 Before implementation, settle:
 
-- Whether the proposed Feature Spec #2 storage contract should be approved without changing its privacy or recovery boundary.
+- Any future change to the approved Feature Spec #2 storage contract, including its privacy or recovery boundary.
 - Exact event list and cooldown for automatic checkpoint requests.
 - Whether the human note is model context by default or display-only by default.
 - Exact compact-field editor behavior and the maximum field length/truncation rules.

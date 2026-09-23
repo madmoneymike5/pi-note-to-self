@@ -1,14 +1,14 @@
 # Progress Tracker
 
-Last updated: Feature Spec #2 drafted; awaiting approval.
+Last updated: Feature Spec #2 approved; implementation not started.
 
 ## Current Phase
 
-Feature Spec #2 — Project Identity & Local Storage is drafted in its documentation worktree.
+Feature Spec #2 — Project Identity & Local Storage is approved and remains paused before implementation.
 
 ## Current Goal
 
-Review and approve Feature Spec #2. No implementation is currently active.
+Wait for Sarah's explicit start instruction before implementing Feature Spec #2. No implementation is currently active.
 
 ## Completed
 
@@ -30,16 +30,16 @@ Review and approve Feature Spec #2. No implementation is currently active.
 - Feature Spec #1 implementation completed on `feature-01-extension-foundation`.
 - PR #1 was reviewed by the Review Stack, CodeRabbit, and Kodus, then merged into `main` at `574ca5d`.
 - The implementation worktree was removed after integration; only the clean primary checkout remains.
-- Feature Spec #2 draft created in `spec-02-storage`; its implementation worktree has not been created.
+- Feature Spec #2 was approved after review; its implementation worktree has not been created.
 
 ## In Progress
 
-- Feature Spec #2 is drafted and awaiting Sarah's approval; implementation has not started.
+- Feature Spec #2 is approved; implementation has not started and remains paused.
 
 ## Next Up
 
-1. Review and approve Feature Spec #2 — Project Identity & Local Storage.
-2. Create its assigned implementation worktree only after approval and an explicit start instruction.
+1. Wait for Sarah's explicit start instruction for Feature Spec #2 — Project Identity & Local Storage.
+2. Create its assigned implementation worktree only when implementation is started.
 3. Keep Features #3–#16 and package publishing on hold until their approved work begins.
 
 ## Evidence and Gaps
@@ -59,7 +59,7 @@ Review and approve Feature Spec #2. No implementation is currently active.
 - No `.tgz` or `dist/` artifact was created; `.tokensave/` is excluded from package preview.
 - Semantic checkpoint quality, native UI behavior, mouse behavior, storage failure handling, and real Pi model behavior remain unimplemented and untested by design.
 - Package publication, release artifact, registry, and continuous delivery remain deferred to Feature Specs #15–#16.
-- Feature Spec #2 is written at [02-project-identity-and-local-storage.md](feature-specs/02-project-identity-and-local-storage.md) and awaits approval.
+- Feature Spec #2 is written and approved at [02-project-identity-and-local-storage.md](feature-specs/02-project-identity-and-local-storage.md); implementation has not started.
 
 ## Open Questions
 

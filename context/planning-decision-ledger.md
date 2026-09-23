@@ -62,7 +62,7 @@ An enabled blocker is always shown. When clear, its value is `Blocker: NONE`; it
 ## 8. Open decisions
 
 - Any future changes to the approved Feature Spec #1 scope or its accepted verification evidence.
-- Whether to approve the proposed Feature Spec #2 storage boundary without changing its privacy, locking, or recovery policy.
+- Any future change to the approved Feature Spec #2 storage boundary, privacy, locking, or recovery policy.
 - Exact deterministic trigger list and checkpoint cooldown/retry rules.
 - Whether the human note is sent to the active model by default.
 - Full settings UI and project-shelf command grammar.
@@ -85,14 +85,14 @@ The foundation remains intentionally limited to package/runtime compatibility an
 
 ## 10. Feature Spec #2 planning inputs
 
-Feature Spec #2 is drafted and awaits Sarah's approval. Its proposed inputs are:
+Feature Spec #2 is approved. Its inputs are:
 
 - Project identity uses the canonical Git common-directory path directly so linked worktrees share one project record, including repositories with separate Git directories; the current worktree root is transient metadata for later workstream logic. Outside Git, identity falls back to canonical cwd. The key is the lowercase SHA-256 hash of the domain-separated `git-common:` or `cwd:` input.
 - Storage is machine-local under `$PI_CODING_AGENT_DIR/note-to-self/`, falling back to `~/.pi/agent/note-to-self/`, and uses private per-project JSON files rather than a database or project-local files.
 - Human note content is a separate `note.md`; generated state cannot overwrite it.
 - Concurrent mutations use the simplest safe shared-session boundary: a five-second per-project exclusive lock plus same-directory atomic replacement. Lock timeouts fail closed; stale-lock reclamation, journals, and semantic merge are not proposed.
 - Version 1 is the only schema in the initial slice. Malformed or newer unsupported records are preserved and fail closed; the initial slice does not auto-reset to empty state, add migrations without a real version-2 contract, or build repair UX.
-- Implementation remains documentation-gated: approval and an explicit start instruction are required before creating the implementation worktree.
+- Implementation remains paused: Sarah's explicit start instruction is required before creating the implementation worktree.
 
 ## 11. Approved feature-spec sequencing for release
 
