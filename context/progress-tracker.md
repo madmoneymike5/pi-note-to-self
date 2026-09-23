@@ -1,14 +1,14 @@
 # Progress Tracker
 
-Last updated: Feature Spec #1 implemented, reviewed, and merged.
+Last updated: Feature Spec #2 drafted; awaiting approval.
 
 ## Current Phase
 
-Feature Spec #1 — Extension Foundation & Compatibility is complete and merged into `main`.
+Feature Spec #2 — Project Identity & Local Storage is drafted in its documentation worktree.
 
 ## Current Goal
 
-Define and review Feature Spec #2. No implementation is currently active.
+Review and approve Feature Spec #2. No implementation is currently active.
 
 ## Completed
 
@@ -30,14 +30,15 @@ Define and review Feature Spec #2. No implementation is currently active.
 - Feature Spec #1 implementation completed on `feature-01-extension-foundation`.
 - PR #1 was reviewed by the Review Stack, CodeRabbit, and Kodus, then merged into `main` at `574ca5d`.
 - The implementation worktree was removed after integration; only the clean primary checkout remains.
+- Feature Spec #2 draft created in `spec-02-storage`; its implementation worktree has not been created.
 
 ## In Progress
 
-- No implementation is in progress. Feature Spec #1 is complete and merged.
+- Feature Spec #2 is drafted and awaiting Sarah's approval; implementation has not started.
 
 ## Next Up
 
-1. Define and review Feature Spec #2 — Project Identity & Local Storage.
+1. Review and approve Feature Spec #2 — Project Identity & Local Storage.
 2. Create its assigned implementation worktree only after approval and an explicit start instruction.
 3. Keep Features #3–#16 and package publishing on hold until their approved work begins.
 
@@ -54,10 +55,11 @@ Define and review Feature Spec #2. No implementation is currently active.
 - Adversarial mutation probes reject wrong RPC IDs, hung version probes, `file:///tmp/...`, absolute paths, `../` traversal, directories, missing entries, symlink escapes, and malformed source; the factory test also rejects non-callable/class exports and API access.
 - LSP diagnostics have no actionable findings; package-decoder hints were recorded as false positives because they are the explicit untrusted JSON boundary decoder.
 - Ubuntu 24.04 GitHub runner documentation at the pinned review-stack workflow's current environment lists Node.js 22.23.2, satisfying the >=22.19.0 floor.
+- Feature Spec #2 documentation passed `git diff --check`, `python3 scripts/check_repository.py`, and the existing `npm run check` after a clean `npm ci --ignore-scripts`; no storage implementation checks were run because implementation has not started.
 - No `.tgz` or `dist/` artifact was created; `.tokensave/` is excluded from package preview.
 - Semantic checkpoint quality, native UI behavior, mouse behavior, storage failure handling, and real Pi model behavior remain unimplemented and untested by design.
 - Package publication, release artifact, registry, and continuous delivery remain deferred to Feature Specs #15–#16.
-- Feature Spec #2 has not been written or started.
+- Feature Spec #2 is written at [02-project-identity-and-local-storage.md](feature-specs/02-project-identity-and-local-storage.md) and awaits approval.
 
 ## Open Questions
 
@@ -67,6 +69,7 @@ See [current issues](current-issues.md), the [planning decision ledger](planning
 
 - Historical implementation branch: `feature-01-extension-foundation`; merged into `main` at `574ca5d`.
 - Historical implementation worktree `/home/sarah-taylor/Dev/worktrees/pi-note-to-self--f913adf4/feature-01-foundation` was removed after integration.
+- Documentation worktree: `/home/sarah-taylor/Dev/worktrees/pi-note-to-self--f913adf4/spec-02-storage` on branch `spec-02-storage`; no implementation worktree exists.
 - Changed files: package manifest/lock, strict TypeScript and ESLint config, shared contained-entry resolver, empty extension entry, focused loadability test, isolated native Pi RPC smoke runner, `.gitignore`, pinned CI native command, status docs, and this tracker.
 - Fresh read-only Codex fallback review returned `CHANGES`; smoke isolation/termination, stale status documentation, manifest containment, and Node-version provisioning findings were fixed. The durable `lao codie-review` queue was unavailable through Keystone.
 - GitHub Review Stack, CodeRabbit, and Kodus completed for PR #1; the post-merge main Review Stack also passed.

@@ -1,13 +1,13 @@
 # Feature Specifications
 
-Feature Spec #1 is implemented, reviewed, and merged into `main`; no implementation is currently active.
+Feature Spec #1 is implemented, reviewed, and merged into `main`. Feature Spec #2 is drafted and awaiting approval; no implementation is currently active.
 
 ## Proposed Feature-Spec Inventory
 
-Entries without their own document are planning entries, not written specifications. Feature Spec #1 is the only implemented specification:
+Entries without their own document are planning entries, not written specifications. Feature Spec #1 is implemented and Feature Spec #2 is the active draft:
 
 1. [Extension Foundation & Compatibility](01-extension-foundation-and-compatibility.md) — **Implemented, reviewed, and merged**
-2. Project Identity & Local Storage
+2. [Project Identity & Local Storage](02-project-identity-and-local-storage.md) — **Draft — awaiting approval**
 3. Human Note Lifecycle
 4. Core Widget & Commands
 5. Compact Fields & Display Preferences

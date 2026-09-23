@@ -28,16 +28,17 @@ No custom Pi client, hosted database, mandatory external service, or telemetry i
 
 ## Storage Model
 
-The exact file names and schema are open until Feature Spec #2 — Project Identity & Local Storage. The settled shape is:
+Feature Spec #2 defines the proposed local storage boundary; its implementation remains unstarted until approval. The current planning shape is:
 
-- A project record keyed by canonical project root.
-- A separate human note that generated updates cannot overwrite.
-- A workstream record keyed by Pi session ID and current tree leaf ID.
-- A bounded history or checkpoint list so branches and resumed sessions remain distinguishable.
-- Schema versioning and lossless handling of unknown fields where practical.
-- Atomic replacement for writes and clear reporting when a write fails.
-- No raw transcript or complete tool-output archive.
-- Optional Pi custom entries for explicit checkpoint provenance; custom entries do not belong in LLM context.
+- Resolve the canonical Git common directory for a repository or linked worktree, returning the current worktree root only as transient metadata; fall back to the canonical cwd outside Git.
+- Key each project by the lowercase SHA-256 hash of a domain-separated canonical Git-common or cwd input; display names and branch/worktree names are never identity keys.
+- Store data under `$PI_CODING_AGENT_DIR/note-to-self/`, falling back to `~/.pi/agent/note-to-self/`, with one private directory per project.
+- Keep `project.json`, the human-authored `note.md`, and later `workstreams/<key>.json` records separate.
+- Use version-1 JSON envelopes, preserve unknown fields where safe, and fail closed for unsupported future versions.
+- Use a bounded per-project lock plus same-directory atomic replacement for mutations; report lock or write failures without claiming success.
+- Preserve malformed or newer unsupported records and fail closed rather than silently replacing them with empty state.
+- Do not store raw transcripts, complete tool output, credentials, provider tokens, or repository files.
+- Optional Pi custom entries for explicit checkpoint provenance remain a later concern; custom entries do not belong in LLM context.
 
 The primary store is local. Chronicle may receive a later curated milestone only by explicit future design; it is not the noisy operational store for this extension.
 
@@ -78,7 +79,7 @@ The exact event classification and evidence model belong in Feature Spec #7 — 
 
 Before implementation, settle:
 
-- Exact stable storage path, file layout, schemas, migrations, and multi-process write behavior.
+- Whether the proposed Feature Spec #2 storage contract should be approved without changing its privacy or recovery boundary.
 - Exact event list and cooldown for automatic checkpoint requests.
 - Whether the human note is model context by default or display-only by default.
 - Exact compact-field editor behavior and the maximum field length/truncation rules.
